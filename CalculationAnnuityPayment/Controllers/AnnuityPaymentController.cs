@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculationAnnuityPayment.Controllers
 {
-    public class AnnuityPayment : Controller
+    public class AnnuityPaymentController : Controller
     {
         public IActionResult CreditData()
         {

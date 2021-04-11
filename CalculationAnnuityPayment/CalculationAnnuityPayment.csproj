@@ -5,14 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="bootstrap" Version="4.6.0" />
-    <PackageReference Include="JQeury.Numeric" Version="1.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\" />
+    <Folder Include="wwwroot\" />
+    <None Include="node_modules/**" />
   </ItemGroup>
 
 </Project>

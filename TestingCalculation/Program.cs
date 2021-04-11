@@ -17,22 +17,6 @@ namespace TestingCalculation
             numberOfMonths = decimal.Parse(Console.ReadLine());
             AnnuityPaymentModel model = new AnnuityPaymentModel(creditAmount, percentRate, numberOfMonths);
             AnnuityPaymentData payment = new AnnuityPaymentData(model);
-            for(int i = 0; i< numberOfMonths; ++i)
-            {
-                ViewModel view = payment.View();
-                Console.Write("Сумма платежа: ");
-                Console.WriteLine(view.amountOfPayment);
-                Console.Write("Основной долг: ");
-                Console.WriteLine(view.mainDebt);
-                Console.Write("Проценты: ");
-                Console.WriteLine(view.percentOnDebt);
-                Console.Write("Остаток долга: ");
-                Console.WriteLine(view.balanceOfDebt);
-                Console.WriteLine("------------------------------");
-
-            }
-
-            
         }
     }
 }
