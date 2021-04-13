@@ -1,6 +1,8 @@
+using CalculationAnnuityPayment.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -24,6 +26,7 @@ namespace CalculationAnnuityPayment
         {
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseExceptionHandler("/Home/Error");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

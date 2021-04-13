@@ -1,22 +1,26 @@
-﻿<form class="needs-validation" novalidate>
+﻿@model AnnuityPaymentModel
+<form class="needs-validation" asp-controller="AnnuityPayment" asp-action="CreditData" method="post" novalidate>
     <div class="col">
         <div class="col-md-6 mb-3">
             <label for="firstName">Сумма кредита</label>
-            <input type="text" class="form-control" id="creditAmount" placeholder="до 1000000" value="" required>
+            <input type="text" class="form-control " asp-for="creditAmount" placeholder="до 1000000" value="" required>
+            <span asp-validation-for="creditAmount" class="text-danger"></span>
             <div class="invalid-feedback">
                 Введите сумму кредита
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <label for="lastName">Процентная ставка</label>
-            <input type="text" class="form-control" id="percentRate" placeholder="" value="" required>
+            <input type="text" class="form-control " asp-for="percentRate" placeholder="" value="" required>
+            <span asp-validation-for="percentRate" class="text-danger"></span>
             <div class="invalid-feedback">
                 Введите процентную ставку
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <label for="lastName">Срок кредитования в месяцах</label>
-            <input type="text" class="form-control" id="numberOfMonths" placeholder="" value="" required>
+            <input type="text" class="form-control " asp-for="numberOfMonths" placeholder="" value="" required>
+            <span asp-validation-for="numberOfMonths" class="text-danger"></span>
             <div class="invalid-feedback">
                 введите срок кредитования
             </div>
