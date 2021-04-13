@@ -20,7 +20,7 @@ namespace CalculationAnnuityPayment.Controllers
         public IActionResult CreditData(AnnuityPaymentModel model)
         {
 
-            if (model.creditAmount == 0)
+            if (model.creditAmount is null)
             {
                 if (ModelState["creditAmount"].Errors.Count>0)
                     ModelState["creditAmount"].Errors.Clear();

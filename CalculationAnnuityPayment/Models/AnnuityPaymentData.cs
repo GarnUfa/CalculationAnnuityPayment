@@ -1,12 +1,13 @@
-﻿using System;
+﻿using CalculationAnnuityPayment.Models;
+using System;
 
 namespace TestingCalculation
 {
     internal class AnnuityPaymentData
     {
-        private decimal creditAmount { get; set; }
-        private decimal percentRate { get; set; }
-        private decimal numberOfMonths { get; set; }
+        private decimal? creditAmount { get; set; }
+        private decimal? percentRate { get; set; }
+        private decimal? numberOfMonths { get; set; }
 
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {
@@ -18,10 +19,10 @@ namespace TestingCalculation
             annuityRate = AnnuityRate();
         }
 
-        private decimal AnnuityRate()
+        private decimal? AnnuityRate()
         {
-            decimal annuityRateValue;
-            decimal _percentDoub = percentRate.ByMonth().PercentNumerical();
+            decimal? annuityRateValue;
+            decimal? _percentDoub = percentRate.ByMonth().PercentNumerical();
             decimal _divider = divider();
             decimal divider()
             {
@@ -34,10 +35,10 @@ namespace TestingCalculation
             return annuityRateValue.Round(4);
         }
 
-        private decimal balanceOfDebt { get; set; }
-        private decimal percentOnDebt { get; set; }
-        private decimal mainDebt { get; set; }
-        private decimal annuityRate { get; set; }
+        private decimal? balanceOfDebt { get; set; }
+        private decimal? percentOnDebt { get; set; }
+        private decimal? mainDebt { get; set; }
+        private decimal? annuityRate { get; set; }
 
         private void PercentOnDebt() =>
             percentOnDebt = (balanceOfDebt * (percentRate.PercentNumerical().ByMonth())).Round(4);

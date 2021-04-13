@@ -13,11 +13,13 @@ namespace CalculationAnnuityPayment.Validations
         {
             ErrorMessage = "Введите число";
         }
+
+
         public override bool IsValid(object value)
         {
-            if(value is int)
+            if(value == null)
             {
-                return true;
+                return false;
             }
             return false;
         }
