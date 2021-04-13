@@ -22,21 +22,18 @@ namespace CalculationAnnuityPayment.Controllers
 
             if (model.creditAmount == 0)
             {
-                var i = ModelState["creditAmount"];
                 if (ModelState["creditAmount"].Errors.Count>0)
                     ModelState["creditAmount"].Errors.Clear();
                 ModelState.AddModelError("creditAmount", "Введите коректное значение");
             }
             if (model.percentRate == 0)
             {
-                var i = ModelState["percentRate"];
                 if (ModelState["percentRate"].Errors.Count > 0)
                     ModelState["percentRate"].Errors.Clear();
                 ModelState.AddModelError("percentRate", "Введите коректное значение");
             }
             if (model.numberOfMonths == 0)
             {
-                var i = ModelState["numberOfMonths"];
                 if (ModelState["numberOfMonths"].Errors.Count > 0)
                     ModelState["numberOfMonths"].Errors.Clear();
                 ModelState.AddModelError("numberOfMonths", "Введите коректное значение");
