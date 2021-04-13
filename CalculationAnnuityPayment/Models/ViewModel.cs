@@ -6,14 +6,6 @@ namespace TestingCalculation
 {
     class ViewModel
     {
-        public ViewModel(decimal balanceOfDebt, decimal percentOnDebt, decimal mainDebt, decimal amountOfPayment)
-        {
-            this.balanceOfDebt = balanceOfDebt;
-            this.percentOnDebt = percentOnDebt;
-            this.mainDebt = mainDebt;
-            this.amountOfPayment = amountOfPayment;
-        }
-
         /// <summary>
         /// Остаток долга 
         /// Остаток долга за прошл мес - 
