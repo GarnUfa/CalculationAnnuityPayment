@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace CalculationAnnuityPayment.Controllers
 {
     public class AnnuityPaymentController : Controller
     {
+        IStringLocalizer lc;
+        public AnnuityPaymentController(IStringLocalizer loc)
+        {
+            lc = loc;
+        }
+
         public IActionResult CreditData()
         {
             return View();
@@ -44,6 +51,12 @@ namespace CalculationAnnuityPayment.Controllers
             }
             else
             {
+                if (model.creditAmount is null)
+                {
+                    if (ModelState["creditAmount"].Errors.Count > 0)
+                        ModelState["creditAmount"].Errors.Clear();
+                    ModelState.AddModelError("creditAmount", "Введите коректное значение");
+                }
                 return View(model);
             }
             
