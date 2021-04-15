@@ -130,11 +130,11 @@
     <comment>ValueMustNotBeNull</comment>
   </data>
   <data name="The field {0} must be a number." xml:space="preserve">
-    <value>Поле {0} должно быть числом.</value>
+    <value>Поле '{0}' должно быть числом.</value>
     <comment>ValueMustBeANumber</comment>
   </data>
   <data name="The supplied value is invalid for {0}." xml:space="preserve">
-    <value>Указанное значение недопустимо для {0}.</value>
+    <value>Указанное значение недопустимо для '{0}'.</value>
     <comment>UnknownValueIsInvalid</comment>
   </data>
   <data name="The value '{0}' is invalid." xml:space="preserve">
@@ -142,7 +142,7 @@
     <comment>ValueIsInvalid</comment>
   </data>
   <data name="The value '{0}' is not valid for {1}." xml:space="preserve">
-    <value>Значение '{0}' не соответствует {1}.</value>
+    <value>Значение '{0}' не соответствует '{1}'.</value>
     <comment>AttemptedValueIsInvalid</comment>
   </data>
 </root>
