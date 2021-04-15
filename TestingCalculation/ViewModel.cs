@@ -6,12 +6,12 @@ namespace TestingCalculation
 {
     class ViewModel
     {
-        public ViewModel(decimal balanceOfDebt, decimal percentOnDebt, decimal mainDebt, decimal amountOfPayment)
+        public ViewModel(decimal balanceOfDebt, decimal percentOnDebt, decimal mainDebt, decimal annuityRate)
         {
             this.balanceOfDebt = balanceOfDebt;
             this.percentOnDebt = percentOnDebt;
             this.mainDebt = mainDebt;
-            this.amountOfPayment = amountOfPayment;
+            this.annuityRate = annuityRate;
         }
 
         /// <summary>
@@ -31,6 +31,6 @@ namespace TestingCalculation
         /// <summary>
         /// Сумма платежа (общая неизменная)
         /// </summary>
-        public decimal amountOfPayment { get; set; }
+        public decimal annuityRate { get; set; }
     }
 }
