@@ -17,6 +17,7 @@ namespace TestingCalculation
             numberOfMonths = decimal.Parse(Console.ReadLine());
             AnnuityPaymentModel model = new AnnuityPaymentModel(creditAmount, percentRate, numberOfMonths);
             AnnuityPaymentData payment = new AnnuityPaymentData(model);
+<<<<<<< Testing
             for (int i = 0; i < numberOfMonths; ++i)
             {
                 ViewModel view = payment.ViewData();
@@ -33,6 +34,8 @@ namespace TestingCalculation
             }
 
 
+=======
+>>>>>>> dev
         }
     }
 }
