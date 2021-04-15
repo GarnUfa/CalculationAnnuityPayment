@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestingCalculation
+namespace CalculationAnnuityPayment.Models
 {
     public static class Converting
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestingCalculation
+namespace CalculationAnnuityPayment.Models
 {
-    class ViewModel
+    public class ViewModel
     {
         public ViewModel(decimal? balanceOfDebt, decimal? percentOnDebt, decimal? mainDebt, decimal? amountOfPayment)
         {
