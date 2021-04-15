@@ -13,12 +13,6 @@ namespace CalculationAnnuityPayment.Controllers
 {
     public class AnnuityPaymentController : Controller
     {
-        IStringLocalizer lc;
-        public AnnuityPaymentController(IStringLocalizer loc)
-        {
-            lc = loc;
-        }
-
         public IActionResult CreditData()
         {
             return View();
@@ -27,36 +21,30 @@ namespace CalculationAnnuityPayment.Controllers
         public IActionResult CreditData(AnnuityPaymentModel model)
         {
 
-            if (model.creditAmount is null)
-            {
-                if (ModelState["creditAmount"].Errors.Count>0)
-                    ModelState["creditAmount"].Errors.Clear();
-                ModelState.AddModelError("creditAmount", "Введите коректное значение");
-            }
-            if (model.percentRate == 0)
-            {
-                if (ModelState["percentRate"].Errors.Count > 0)
-                    ModelState["percentRate"].Errors.Clear();
-                ModelState.AddModelError("percentRate", "Введите коректное значение");
-            }
-            if (model.numberOfMonths == 0)
-            {
-                if (ModelState["numberOfMonths"].Errors.Count > 0)
-                    ModelState["numberOfMonths"].Errors.Clear();
-                ModelState.AddModelError("numberOfMonths", "Введите коректное значение");
-            }
+            //if (model.creditAmount is null)
+            //{
+            //    if (ModelState["creditAmount"].Errors.Count>0)
+            //        ModelState["creditAmount"].Errors.Clear();
+            //    ModelState.AddModelError("creditAmount", "Введите коректное значение");
+            //}
+            //if (model.percentRate == 0)
+            //{
+            //    if (ModelState["percentRate"].Errors.Count > 0)
+            //        ModelState["percentRate"].Errors.Clear();
+            //    ModelState.AddModelError("percentRate", "Введите коректное значение");
+            //}
+            //if (model.numberOfMonths == 0)
+            //{
+            //    if (ModelState["numberOfMonths"].Errors.Count > 0)
+            //        ModelState["numberOfMonths"].Errors.Clear();
+            //    ModelState.AddModelError("numberOfMonths", "Введите коректное значение");
+            //}
             if (ModelState.IsValid)
             {
                 return Content("<h1>qweq</h1>");
             }
             else
             {
-                if (model.creditAmount is null)
-                {
-                    if (ModelState["creditAmount"].Errors.Count > 0)
-                        ModelState["creditAmount"].Errors.Clear();
-                    ModelState.AddModelError("creditAmount", "Введите коректное значение");
-                }
                 return View(model);
             }
             

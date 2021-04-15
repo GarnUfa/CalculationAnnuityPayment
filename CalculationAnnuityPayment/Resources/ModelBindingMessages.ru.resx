@@ -142,7 +142,7 @@
     <comment>ValueIsInvalid</comment>
   </data>
   <data name="The value '{0}' is not valid for {1}." xml:space="preserve">
-    <value>Значение '{0}' не равно {0}.</value>
+    <value>Значение '{0}' не соответствует {1}.</value>
     <comment>AttemptedValueIsInvalid</comment>
   </data>
 </root>
