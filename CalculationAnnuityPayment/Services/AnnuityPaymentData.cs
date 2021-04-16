@@ -1,7 +1,7 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
 
-namespace TestingCalculation
+namespace CalculationAnnuityPayment.Services
 {
     internal class AnnuityPaymentData
     {

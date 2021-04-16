@@ -31,5 +31,7 @@ namespace CalculationAnnuityPayment.Models
         /// Сумма платежа (общая неизменная)
         /// </summary>
         public decimal? amountOfPayment { get; set; }
+        public decimal? numberOfMonths { get; set; }
+        public DateTime dateNow { get; set; } = DateTime.Now;
     }
 }

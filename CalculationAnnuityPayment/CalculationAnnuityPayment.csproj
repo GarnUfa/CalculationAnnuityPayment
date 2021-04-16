@@ -13,11 +13,4 @@
     <None Include="node_modules/**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Services\**" />
-    <Content Remove="Services\**" />
-    <EmbeddedResource Remove="Services\**" />
-    <None Remove="Services\**" />
-  </ItemGroup>
-
 </Project>

@@ -49,9 +49,9 @@ namespace CalculationAnnuityPayment.Controllers
             }
             
         }
-        public IActionResult CalculationResults()
+        public IActionResult CalculationResults(IEnumerable<ViewModel> PaymentTable)
         {
-            return View();
+            return View(PaymentTable);
         }
         public IActionResult Error()
         {
