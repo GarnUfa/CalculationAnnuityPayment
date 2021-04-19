@@ -6,7 +6,7 @@ namespace TestingCalculation
 {
     class AnnuityPaymentModel
     {
-        public AnnuityPaymentModel(decimal creditAmount, decimal percentRate, decimal numberOfMonths)
+        public AnnuityPaymentModel(decimal creditAmount, decimal percentRate, int numberOfMonths)
         {
             this.creditAmount = creditAmount;
             this.percentRate = percentRate;
@@ -15,6 +15,6 @@ namespace TestingCalculation
 
         public decimal creditAmount { get; set; }
         public decimal percentRate { get; set; }
-        public decimal numberOfMonths { get; set; }
+        public int numberOfMonths { get; set; }
     }
 }
