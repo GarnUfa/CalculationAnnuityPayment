@@ -8,7 +8,7 @@ namespace CalculationAnnuityPayment.Services
     {
         private decimal? creditAmount { get; set; }
         private decimal? percentRate { get; set; }
-        private decimal? numberOfMonths { get; set; }
+        private int? numberOfMonths { get; set; }
 
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {

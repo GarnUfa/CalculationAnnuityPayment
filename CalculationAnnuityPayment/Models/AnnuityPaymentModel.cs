@@ -18,7 +18,7 @@ namespace CalculationAnnuityPayment.Models
         [Display(Name = "Срок кредитования")]
         [Required(ErrorMessage = "Введите срок кредитования в месяцах")]
         [Range(6, 600, ErrorMessage = "Неверный срок кредитования")]
-        public decimal? numberOfMonths { get; set; }
+        public int? numberOfMonths { get; set; }
 
     }
 }
