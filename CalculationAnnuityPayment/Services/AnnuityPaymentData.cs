@@ -1,13 +1,14 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
+using System.Collections.Generic;
 
-namespace TestingCalculation
+namespace CalculationAnnuityPayment.Services
 {
     internal class AnnuityPaymentData
     {
         private decimal? creditAmount { get; set; }
         private decimal? percentRate { get; set; }
-        private decimal? numberOfMonths { get; set; }
+        private int? numberOfMonths { get; set; }
 
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {
@@ -48,7 +49,7 @@ namespace TestingCalculation
             balanceOfDebt = balanceOfDebt - mainDebt;
 
 
-        public ViewModel ViewData()
+        private ViewModel ViewData()
         {
             PercentOnDebt();
             MainDebt();
@@ -59,6 +60,13 @@ namespace TestingCalculation
                 mainDebt,
                 annuityRate
                 );
+        }
+        public IEnumerable<ViewModel> PaymentList()
+        {
+            for (int i = 0; i < numberOfMonths; i++)
+            {
+                yield return ViewData();
+            }
         }
 
     }

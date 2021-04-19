@@ -11,7 +11,18 @@
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/form-validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>s
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        // переопределение валидации на стороне клиента
+        $.validator.methods.range = function (value, element, param) {
+            var globalizedValue = value.replace(",", ".");
+            return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+        }
+
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+        }
+    </script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -24,6 +35,7 @@
     </style>
 </head>
 <body>
+
     <div class="container" style="position:relative">
         @RenderBody()
     </div>

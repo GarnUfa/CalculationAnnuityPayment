@@ -1,4 +1,4 @@
-﻿@model CalculationAnnuityPayment.Models.ViewModel
+﻿@model IEnumerable<CalculationAnnuityPayment.Models.ViewModel>
 
 @{
     ViewData["Title"] = "CalculationResults";
@@ -6,17 +6,48 @@
 
 <h1>CalculationResults</h1>
 
-
-<div>
-    <table>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
         <tr>
-            <th>№</th>
-            <th>Дата платежа</th>
-            <th>Сумма платежа</th>
-            <th>Основной долг</th>
-            <th>Проценты</th>
-            <th>Остаток долга</th>
+            <th>
+                @Html.DisplayNameFor(model => model.balanceOfDebt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.percentOnDebt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mainDebt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amountOfPayment)
+            </th>
+            <th></th>
         </tr>
-    </table>
-    <a asp-action="CreditData">Back to List</a>
-</div>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.balanceOfDebt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.percentOnDebt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mainDebt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amountOfPayment)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
