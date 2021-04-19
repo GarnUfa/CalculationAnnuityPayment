@@ -1,5 +1,6 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
+using System.Collections.Generic;
 
 namespace CalculationAnnuityPayment.Services
 {
@@ -48,7 +49,7 @@ namespace CalculationAnnuityPayment.Services
             balanceOfDebt = balanceOfDebt - mainDebt;
 
 
-        public ViewModel ViewData()
+        private ViewModel ViewData()
         {
             PercentOnDebt();
             MainDebt();
@@ -59,6 +60,13 @@ namespace CalculationAnnuityPayment.Services
                 mainDebt,
                 annuityRate
                 );
+        }
+        public IEnumerable<ViewModel> PaymentList()
+        {
+            for (int i = 0; i < numberOfMonths; i++)
+            {
+                yield return ViewData();
+            }
         }
 
     }
