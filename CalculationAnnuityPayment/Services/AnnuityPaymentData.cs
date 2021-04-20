@@ -14,10 +14,11 @@ namespace CalculationAnnuityPayment.Services
         {
             creditAmount = model.creditAmount;
             percentRate = model.percentRate;
-            numberOfMonths = model.numberOfMonths;
+            numberOfMonths = int.Parse(model.numberOfMonths);
 
             balanceOfDebt = model.creditAmount;
             annuityRate = AnnuityRate();
+            paymentDate = DateTime.Now;
         }
 
         private decimal AnnuityRate()
@@ -40,6 +41,7 @@ namespace CalculationAnnuityPayment.Services
         private decimal percentOnDebt { get; set; }
         private decimal mainDebt { get; set; }
         private decimal annuityRate { get; set; }
+        public DateTime paymentDate { get; set; }
 
         private void PercentOnDebt() =>
             percentOnDebt = (balanceOfDebt * (percentRate.PercentNumerical().ByMonth())).Round(4);
@@ -47,14 +49,19 @@ namespace CalculationAnnuityPayment.Services
             mainDebt = annuityRate - percentOnDebt;
         private void BalanceOfDebt() =>
             balanceOfDebt = balanceOfDebt - mainDebt;
+        private void PaymentDate() =>
+            paymentDate = paymentDate.AddDays(30);
 
 
-        private ViewModel ViewData()
+        private ViewModel ViewData(int numberOfMonths)
         {
+            PaymentDate();
             PercentOnDebt();
             MainDebt();
             BalanceOfDebt();
             return new ViewModel(
+                numberOfMonths,
+                paymentDate,
                 balanceOfDebt,
                 percentOnDebt,
                 mainDebt,
@@ -65,7 +72,7 @@ namespace CalculationAnnuityPayment.Services
         {
             for (int i = 0; i < numberOfMonths; i++)
             {
-                yield return ViewData();
+                yield return ViewData(i);
             }
         }
 
