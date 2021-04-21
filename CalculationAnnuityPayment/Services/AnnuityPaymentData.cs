@@ -14,7 +14,7 @@ namespace CalculationAnnuityPayment.Services
         {
             creditAmount = model.creditAmount;
             percentRate = model.percentRate;
-            numberOfMonths = int.Parse(model.numberOfMonths);
+            numberOfMonths = model.LoanTerm;
 
             balanceOfDebt = model.creditAmount;
             annuityRate = AnnuityRate();

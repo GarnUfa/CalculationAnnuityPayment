@@ -33,6 +33,26 @@ namespace CalculationAnnuityPayment.Controllers
             }
             
         }
+        public IActionResult ExtendedCreditData()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ExtendedCreditData(AnnuityPaymentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                AnnuityPaymentData am = new AnnuityPaymentData(model);
+                IEnumerable<ViewModel> pay = am.PaymentList();
+                return View("CalculationResults", pay);
+            }
+            else
+            {
+                return View(model);
+            }
+
+        }
         public IActionResult CalculationResults(IEnumerable<ViewModel> PaymentTable)
         {
             return View(PaymentTable);
