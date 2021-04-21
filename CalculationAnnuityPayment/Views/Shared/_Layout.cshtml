@@ -41,10 +41,10 @@
             <div class="row">
                 <div class="col-1 p-0"></div>
                 <div class="col-3 p-1 ">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Стандартная версия</button>
+                    <button class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.ActionLink("CreditData","AnnuityPayment")'" type="submit">Стандартная версия</button>
                 </div>
                 <div class="col-3 p-1 ">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Расширеная версия</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='@Url.ActionLink("ExtendedCreditData","AnnuityPayment")'">Расширеная версия</button>
                 </div>
             </div>
     <hr class="mb-4">

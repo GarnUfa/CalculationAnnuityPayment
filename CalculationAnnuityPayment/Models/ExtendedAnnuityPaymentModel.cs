@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,9 @@ namespace CalculationAnnuityPayment.Models
     {
         public override decimal creditAmount { get => base.creditAmount; set => base.creditAmount = value; }
         public override decimal percentRate { get => base.percentRate; set => base.percentRate = value; }
+        [Display(Name = "Срок кредитования")]
+        [Required(ErrorMessage = "Введите срок кредитования (дни)")]
+        [Range(1, 3650, ErrorMessage = "Неверный срок кредитования")]
         public override int LoanTerm { get => base.LoanTerm; set => base.LoanTerm = value; }
         public int paymentStep { get; set; }
     }

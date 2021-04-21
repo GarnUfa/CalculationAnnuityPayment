@@ -1,7 +1,7 @@
 ﻿@model ExtendedAnnuityPaymentModel
 
 
-    <form class="needs-validation" asp-controller="AnnuityPayment" asp-action="CreditData" method="post" novalidate>
+    <form class="needs-validation" asp-controller="AnnuityPayment" asp-action="ExtendedCreditData" method="post" novalidate>
         <div class="col">
             <div class="col-md-6 mb-3">
                 <label for="firstName">Сумма кредитования</label>
@@ -16,13 +16,13 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="lastName">Срок кредитования в месяцах</label>
+                <label for="lastName">Срок кредитования в днях</label>
                 <input type="text" class="form-control " asp-for="LoanTerm" placeholder="" value="" required>
                 <span asp-validation-for="LoanTerm" class="text-danger"></span>
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="lastName">Срок кредитования в месяцах</label>
+                <label for="lastName">Шаг платежа</label>
                 <input type="text" class="form-control " asp-for="paymentStep" placeholder="" value="" required>
                 <span asp-validation-for="paymentStep" class="text-danger"></span>
             </div>

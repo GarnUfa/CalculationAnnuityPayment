@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CalculationAnnuityPayment.Services
 {
-    internal class AnnuityPaymentData
+    internal class AnnuityPaymentData: IAnnuityPayment
     {
         private decimal creditAmount { get; set; }
         private decimal percentRate { get; set; }

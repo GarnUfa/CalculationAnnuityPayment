@@ -23,7 +23,7 @@ namespace CalculationAnnuityPayment.Controllers
         {
             if (ModelState.IsValid)
             {
-                AnnuityPaymentData am = new AnnuityPaymentData(model);
+                IAnnuityPayment am = new AnnuityPaymentData(model);
                 IEnumerable<ViewModel> pay = am.PaymentList();
                 return View("CalculationResults", pay);
             }
@@ -38,12 +38,12 @@ namespace CalculationAnnuityPayment.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ExtendedCreditData(AnnuityPaymentModel model)
+        public IActionResult ExtendedCreditData(ExtendedAnnuityPaymentModel model)
         {
             if (ModelState.IsValid)
             {
                
-                AnnuityPaymentData am = new AnnuityPaymentData(model);
+                IAnnuityPayment am = new ExtendedAnnuityPaymentData(model);
                 IEnumerable<ViewModel> pay = am.PaymentList();
                 return View("CalculationResults", pay);
             }
