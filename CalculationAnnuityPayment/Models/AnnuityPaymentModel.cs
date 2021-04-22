@@ -20,7 +20,7 @@ namespace CalculationAnnuityPayment.Models
         [Display(Name = "Срок кредитования")]
         [Required(ErrorMessage = "Введите срок кредитования (месяцы)")]
         [Range(6, 600, ErrorMessage = "Неверный срок кредитования")]
-        public virtual int LoanTerm { get; set; }
+        public virtual int numberOfPayments { get; set; }
 
     }
     public class Valid : RangeAttribute

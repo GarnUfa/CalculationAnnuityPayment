@@ -8,19 +8,37 @@ namespace CalculationAnnuityPayment.Services
     {
         private decimal creditAmount { get; set; }
         private decimal percentRate { get; set; }
-        private int numberOfMonths { get; set; }
+        private int numberOfPayments { get; set; }
+        private int paymentStep { get; set; }
 
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {
             creditAmount = model.creditAmount;
             percentRate = model.percentRate;
-            numberOfMonths = model.LoanTerm;
+            numberOfPayments = model.numberOfPayments;
 
             balanceOfDebt = model.creditAmount;
             annuityRate = AnnuityRate();
             paymentDate = DateTime.Now;
+            if(model.GetType() == typeof(ExtendedAnnuityPaymentModel))
+            {
+                ExtendedAnnuityPaymentModel mod = (ExtendedAnnuityPaymentModel)model;
+                paymentStep = mod.paymentStep;
+            }
         }
 
+        //private int ReductionToByDayCalculation(int numberOfPayments, int paymentStep)
+        //{
+        //    int i = numberOfPayments % paymentStep;
+        //    if (i == 0)
+        //    {
+        //        return (numberOfPayments / paymentStep);
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
         private decimal AnnuityRate()
         {
             decimal annuityRateValue;
@@ -31,7 +49,7 @@ namespace CalculationAnnuityPayment.Services
                 return
                     (decimal)(Math.Pow(1 +
                     (double)percentRate.ByMonth().PercentNumerical(),
-                    (double)numberOfMonths) - 1);
+                    (double)numberOfPayments) - 1);
             }
             annuityRateValue = creditAmount * (_percentDoub + (_percentDoub / _divider));
             return annuityRateValue.Round(4);
@@ -70,7 +88,7 @@ namespace CalculationAnnuityPayment.Services
         }
         public IEnumerable<ViewModel> PaymentList()
         {
-            for (int i = 0; i < numberOfMonths; i++)
+            for (int i = 0; i < numberOfPayments; i++)
             {
                 yield return ViewData(i);
             }

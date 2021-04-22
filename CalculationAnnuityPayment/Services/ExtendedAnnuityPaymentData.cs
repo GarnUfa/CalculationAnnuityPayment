@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculationAnnuityPayment.Services
 {
+    // TODO Сокрыть лишнее оставить только сервис на выход в VIEW
     public class ExtendedAnnuityPaymentData : IAnnuityPayment
     {
         public ExtendedAnnuityPaymentData(ExtendedAnnuityPaymentModel model)
@@ -15,7 +16,7 @@ namespace CalculationAnnuityPayment.Services
 
         public IEnumerable<ViewModel> PaymentList()
         {
-            throw new NotImplementedException();
+
         }
     }
 }
