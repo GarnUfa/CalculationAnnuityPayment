@@ -21,7 +21,7 @@ namespace CalculationAnnuityPayment.Services
             numberOfPayments = model.creditPeriod;
 
             balanceOfDebt = model.creditAmount;
-            annuityRate = AnnuityRate(percentRate, creditPeriod);
+            annuityRate = AnnuityRate(percentRate, numberOfPayments);
             paymentDate = DateTime.Now;
         }
 

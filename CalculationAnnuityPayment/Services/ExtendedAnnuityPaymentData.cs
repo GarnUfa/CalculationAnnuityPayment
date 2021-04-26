@@ -1,8 +1,6 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CalculationAnnuityPayment.Services
 {
@@ -17,8 +15,11 @@ namespace CalculationAnnuityPayment.Services
             this.creditPeriod = model.creditPeriod;
 
             balanceOfDebt = model.creditAmount;
-            annuityRate = AnnuityRate(percentRate, creditPeriod);
+            NumberOfPayments();
+            PercentRatePerYear();
+            annuityRate = AnnuityRate(percentRatePerYear, numberOfPayments);
             paymentDate = DateTime.Now;
+
         }
 
         protected override decimal creditAmount { get; set; }
@@ -48,7 +49,7 @@ namespace CalculationAnnuityPayment.Services
         /// Процентная часть в платеже
         /// </summary>
         private void PercentOnDebt() =>
-            percentOnDebt = (balanceOfDebt * (percentRate.PercentNumerical().ByMonth())).Round(4);
+            percentOnDebt = (balanceOfDebt * (percentRatePerYear.PercentNumerical().ByMonth())).Round(4);
         /// <summary>
         /// Основной платеж
         /// </summary>
@@ -61,8 +62,6 @@ namespace CalculationAnnuityPayment.Services
             balanceOfDebt = balanceOfDebt - mainDebt;
         private ViewModel ViewData(int numberOfMonths)
         {
-            NumberOfPayments();
-            PercentRatePerYear();
             PaymentDate();
             PercentOnDebt();
             MainDebt();
@@ -78,7 +77,7 @@ namespace CalculationAnnuityPayment.Services
         }
         public IEnumerable<ViewModel> PaymentList()
         {
-            for (int i = 0; i < creditPeriod; i++)
+            for (int i = 0; i < numberOfPayments; i++)
             {
                 yield return ViewData(i);
             }

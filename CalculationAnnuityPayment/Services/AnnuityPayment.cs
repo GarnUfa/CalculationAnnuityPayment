@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CalculationAnnuityPayment.Services
 {
@@ -34,7 +31,7 @@ namespace CalculationAnnuityPayment.Services
         /// <summary>
         /// Аннуитетная ставка(фиксированный платеж на количество платежей)
         /// </summary>
-        protected decimal AnnuityRate(decimal percentRate, int creditPeriod)
+        protected decimal AnnuityRate(decimal percentRate, int numberOfPayments)
         {
             decimal annuityRateValue;
             decimal _percentDoub = percentRate.ByMonth().PercentNumerical();
@@ -44,7 +41,7 @@ namespace CalculationAnnuityPayment.Services
                 return
                     (decimal)(Math.Pow(1 +
                     (double)_percentDoub,
-                    (double)creditPeriod));
+                    (double)numberOfPayments));
             }
             annuityRateValue = creditAmount * (_percentDoub * _divider / (_divider - 1));
             return annuityRateValue.Round(4);
