@@ -13,7 +13,7 @@ namespace CalculationAnnuityPayment.Models
         [Display(Name = "Срок кредитования")]
         [Required(ErrorMessage = "Введите срок кредитования (дни)")]
         [Range(1, 3650, ErrorMessage = "Неверный срок кредитования")]
-        public override int numberOfPayments { get => base.numberOfPayments; set => base.numberOfPayments = value; }
+        public override int creditPeriod { get => base.creditPeriod; set => base.creditPeriod = value; }
         public int paymentStep { get; set; }
     }
 }

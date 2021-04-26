@@ -4,71 +4,52 @@ using System.Collections.Generic;
 
 namespace CalculationAnnuityPayment.Services
 {
-    internal class AnnuityPaymentData: IAnnuityPayment
+    internal class AnnuityPaymentData: AnnuityPayment, IAnnuityPayment
     {
-        private decimal creditAmount { get; set; }
-        private decimal percentRate { get; set; }
-        private int numberOfPayments { get; set; }
-        private int paymentStep { get; set; }
+        protected override decimal creditAmount { get; set; }
+        protected override decimal percentRate { get; set; }
+        protected override int numberOfPayments { get; set; }
+        protected override int creditPeriod { get; set; }
+        protected override int paymentStep { get; set; } = 30;
+        protected override DateTime paymentDate { get; set; }
 
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {
             creditAmount = model.creditAmount;
             percentRate = model.percentRate;
-            numberOfPayments = model.numberOfPayments;
+            creditPeriod = model.creditPeriod;
+            numberOfPayments = model.creditPeriod;
 
             balanceOfDebt = model.creditAmount;
-            annuityRate = AnnuityRate();
+            annuityRate = AnnuityRate(percentRate, creditPeriod);
             paymentDate = DateTime.Now;
-            if(model.GetType() == typeof(ExtendedAnnuityPaymentModel))
-            {
-                ExtendedAnnuityPaymentModel mod = (ExtendedAnnuityPaymentModel)model;
-                paymentStep = mod.paymentStep;
-            }
         }
 
-        //private int ReductionToByDayCalculation(int numberOfPayments, int paymentStep)
-        //{
-        //    int i = numberOfPayments % paymentStep;
-        //    if (i == 0)
-        //    {
-        //        return (numberOfPayments / paymentStep);
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
-        private decimal AnnuityRate()
-        {
-            decimal annuityRateValue;
-            decimal _percentDoub = percentRate.ByMonth().PercentNumerical();
-            decimal _divider = divider();
-            decimal divider()
-            {
-                return
-                    (decimal)(Math.Pow(1 +
-                    (double)percentRate.ByMonth().PercentNumerical(),
-                    (double)numberOfPayments) - 1);
-            }
-            annuityRateValue = creditAmount * (_percentDoub + (_percentDoub / _divider));
-            return annuityRateValue.Round(4);
-        }
-
-        private decimal balanceOfDebt { get; set; }
         private decimal percentOnDebt { get; set; }
         private decimal mainDebt { get; set; }
+        private decimal balanceOfDebt { get; set; }
         private decimal annuityRate { get; set; }
-        public DateTime paymentDate { get; set; }
-
+        
+        /// <summary>
+        /// Процентная часть в платеже
+        /// </summary>
         private void PercentOnDebt() =>
             percentOnDebt = (balanceOfDebt * (percentRate.PercentNumerical().ByMonth())).Round(4);
+        /// <summary>
+        /// Основной платеж
+        /// </summary>
         private void MainDebt() =>
             mainDebt = annuityRate - percentOnDebt;
+        /// <summary>
+        /// Сумма долга на момент платежа
+        /// </summary>
         private void BalanceOfDebt() =>
             balanceOfDebt = balanceOfDebt - mainDebt;
+        /// <summary>
+        /// Дата платежа
+        /// </summary>
         private void PaymentDate() =>
-            paymentDate = paymentDate.AddDays(30);
+            paymentDate = paymentDate.AddDays(paymentStep);
 
 
         private ViewModel ViewData(int numberOfMonths)
@@ -88,7 +69,7 @@ namespace CalculationAnnuityPayment.Services
         }
         public IEnumerable<ViewModel> PaymentList()
         {
-            for (int i = 0; i < numberOfPayments; i++)
+            for (int i = 0; i < creditPeriod; i++)
             {
                 yield return ViewData(i);
             }
