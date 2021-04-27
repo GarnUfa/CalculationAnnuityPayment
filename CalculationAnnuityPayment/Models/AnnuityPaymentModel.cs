@@ -23,12 +23,4 @@ namespace CalculationAnnuityPayment.Models
         public virtual int creditPeriod { get; set; }
 
     }
-    public class Valid : RangeAttribute
-    {
-        public Valid(int minimum, int maximum):base(minimum, maximum)
-        {
-
-        }
-
-    }
 }

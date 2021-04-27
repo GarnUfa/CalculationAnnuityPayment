@@ -7,7 +7,7 @@ namespace CalculationAnnuityPayment.Models
 {
     public class ViewModel
     {
-        public ViewModel(int paymentNumber, DateTime paymentDate, decimal balanceOfDebt, decimal percentOnDebt, decimal mainDebt, decimal amountOfPayment)
+        public ViewModel(int paymentNumber, string paymentDate, decimal balanceOfDebt, decimal percentOnDebt, decimal mainDebt, decimal amountOfPayment)
         {
             this.paymentNumber = paymentNumber;
             this.paymentDate = paymentDate;
@@ -21,14 +21,14 @@ namespace CalculationAnnuityPayment.Models
         /// Номер платежа. Он же количество месяцей\дней зависит от типа подсчета (по дням или месяцам)
         /// </summary>
         /// 
-        [Display(Name = "Нлмер платежа")]
+        [Display(Name = "Номер платежа")]
         public int paymentNumber { get; set; }
         /// <summary>
         /// Дата платежа
         /// </summary>
         /// 
         [Display(Name = "Дата платежа")]
-        public DateTime paymentDate { get; set; }
+        public string paymentDate { get; set; }
         /// <summary>
         /// Остаток долга 
         /// Остаток долга за прошл мес

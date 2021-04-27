@@ -1,20 +1,15 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CalculationAnnuityPayment.Services
 {
     internal class AnnuityPaymentData: AnnuityPayment, IAnnuityPayment
     {
-        protected override decimal creditAmount { get; set; }
-        protected override decimal percentRate { get; set; }
-        protected override int numberOfPayments { get; set; }
-        protected override int creditPeriod { get; set; }
-        protected override int paymentStep { get; set; } = 30;
-        protected override DateTime paymentDate { get; set; }
-
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {
+            paymentStep = 30;
             creditAmount = model.creditAmount;
             percentRate = model.percentRate;
             creditPeriod = model.creditPeriod;
@@ -22,14 +17,8 @@ namespace CalculationAnnuityPayment.Services
 
             balanceOfDebt = model.creditAmount;
             annuityRate = AnnuityRate(percentRate, numberOfPayments);
-            paymentDate = DateTime.Now;
         }
 
-        private decimal percentOnDebt { get; set; }
-        private decimal mainDebt { get; set; }
-        private decimal balanceOfDebt { get; set; }
-        private decimal annuityRate { get; set; }
-        
         /// <summary>
         /// Процентная часть в платеже
         /// </summary>
@@ -48,19 +37,16 @@ namespace CalculationAnnuityPayment.Services
         /// <summary>
         /// Дата платежа
         /// </summary>
-        private void PaymentDate() =>
-            paymentDate = paymentDate.AddDays(paymentStep);
 
-
-        private ViewModel ViewData(int numberOfMonths)
+        
+        private ViewModel ViewData(int currentPayment)
         {
-            PaymentDate();
             PercentOnDebt();
             MainDebt();
             BalanceOfDebt();
             return new ViewModel(
-                numberOfMonths,
-                paymentDate,
+                currentPayment,
+                PaymentDate(currentPayment),
                 balanceOfDebt,
                 percentOnDebt,
                 mainDebt,
@@ -69,7 +55,7 @@ namespace CalculationAnnuityPayment.Services
         }
         public IEnumerable<ViewModel> PaymentList()
         {
-            for (int i = 0; i < creditPeriod; i++)
+            for (int i = 1; i <= numberOfPayments; i++)
             {
                 yield return ViewData(i);
             }

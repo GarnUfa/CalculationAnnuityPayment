@@ -1,10 +1,10 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CalculationAnnuityPayment.Services
 {
-    // TODO Сокрыть лишнее оставить только сервис на выход в VIEW
     internal class ExtendedAnnuityPaymentData : AnnuityPayment, IAnnuityPayment
     {
         public ExtendedAnnuityPaymentData(ExtendedAnnuityPaymentModel model)
@@ -18,32 +18,39 @@ namespace CalculationAnnuityPayment.Services
             NumberOfPayments();
             PercentRatePerYear();
             annuityRate = AnnuityRate(percentRatePerYear, numberOfPayments);
-            paymentDate = DateTime.Now;
-
         }
-
-        protected override decimal creditAmount { get; set; }
-        protected override decimal percentRate { get; set; }
-        protected override int paymentStep { get; set; }
-        protected override int creditPeriod { get; set; }
-       
-        protected override int numberOfPayments { get; set; }
+        /// <summary>
+        /// Считаем количество платежей в зависимости от шага платежа
+        /// </summary>
         private void NumberOfPayments() =>
             numberOfPayments = creditPeriod / paymentStep;
-
+        /// <summary>
+        /// Процентная ставка в год, в шаговом платеже
+        /// </summary>
         private decimal percentRatePerYear { get; set; }
+        /// <summary>
+        /// Считаем процентную ставку в год, в шаговом платеже (проценты в день на кол-во дней)
+        /// </summary>
         private void PercentRatePerYear() =>
             percentRatePerYear = percentRate*creditPeriod;
 
-        protected override DateTime paymentDate { get; set; }
-        private void PaymentDate() =>
-            paymentDate = paymentDate.AddDays(paymentStep);
 
-
-        private decimal percentOnDebt { get; set; }
-        private decimal mainDebt { get; set; }
-        private decimal balanceOfDebt { get; set; }
-        private decimal annuityRate { get; set; }
+        protected override string PaymentDate(int currentPayment)
+        {
+            ///Проверяем на кратность периода кредитования шагу платежа
+            ///Если не кратен и шаг платежа является последним (последний платеж) то смещаем дату платежа на последний день 
+            if (creditPeriod % paymentStep != 0 && currentPayment == numberOfPayments)
+            {
+                paymentDate = paymentDate.AddDays(paymentStep+(creditPeriod % paymentStep));
+            }
+            else
+            {
+                paymentDate = paymentDate.AddDays(paymentStep);
+            }
+            string _paymentDate = paymentDate.ToString("dddd dd MMMM yyyy",
+                  CultureInfo.CreateSpecificCulture("ru-RU"));
+            return _paymentDate;
+        }
 
         /// <summary>
         /// Процентная часть в платеже
@@ -60,15 +67,16 @@ namespace CalculationAnnuityPayment.Services
         /// </summary>
         private void BalanceOfDebt() =>
             balanceOfDebt = balanceOfDebt - mainDebt;
-        private ViewModel ViewData(int numberOfMonths)
+
+
+        private ViewModel ViewData(int currentPayment)
         {
-            PaymentDate();
             PercentOnDebt();
             MainDebt();
             BalanceOfDebt();
             return new ViewModel(
-                numberOfMonths,
-                paymentDate,
+                currentPayment,
+                PaymentDate(currentPayment),
                 balanceOfDebt,
                 percentOnDebt,
                 mainDebt,
@@ -77,7 +85,7 @@ namespace CalculationAnnuityPayment.Services
         }
         public IEnumerable<ViewModel> PaymentList()
         {
-            for (int i = 0; i < numberOfPayments; i++)
+            for (int i = 1; i <= numberOfPayments; i++)
             {
                 yield return ViewData(i);
             }

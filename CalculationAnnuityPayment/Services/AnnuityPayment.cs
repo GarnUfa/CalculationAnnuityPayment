@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace CalculationAnnuityPayment.Services
 {
@@ -7,30 +8,46 @@ namespace CalculationAnnuityPayment.Services
         /// <summary>
         /// Сумма кредита
         /// </summary>
-        protected abstract decimal creditAmount { get; set; }
+        protected decimal creditAmount { get; set; }
         /// <summary>
         /// Процентная ставка
         /// </summary>
-        protected abstract decimal percentRate { get; set; }
+        protected decimal percentRate { get; set; }
         /// <summary>
         /// количество платежей
         /// </summary>
-        protected abstract int numberOfPayments { get; set; }
+        protected int numberOfPayments { get; set; }
         /// <summary>
         /// Срок кредитования
         /// </summary>
-        protected abstract int creditPeriod { get; set; }
+        protected int creditPeriod { get; set; }
         /// <summary>
         /// Шаг платежа
         /// </summary>
-        protected abstract int paymentStep { get; set; }
+        protected int paymentStep { get; set; }
         /// <summary>
         /// Дата платежа
         /// </summary>
-        protected abstract DateTime paymentDate { get; set; }
+        protected DateTime paymentDate { get; set; } = DateTime.Now;
+        /// <summary>
+        /// Процентная часть в платеже
+        /// </summary>
+        protected decimal percentOnDebt { get; set; }
+        /// <summary>
+        /// Основной платеж
+        /// </summary>
+        protected decimal mainDebt { get; set; }
+        /// <summary>
+        /// Сумма долга на момент платежа
+        /// </summary>
+        protected decimal balanceOfDebt { get; set; }
+
+        protected decimal annuityRate { get; set; }
+
         /// <summary>
         /// Аннуитетная ставка(фиксированный платеж на количество платежей)
         /// </summary>
+        /// 
         protected decimal AnnuityRate(decimal percentRate, int numberOfPayments)
         {
             decimal annuityRateValue;
@@ -46,5 +63,16 @@ namespace CalculationAnnuityPayment.Services
             annuityRateValue = creditAmount * (_percentDoub * _divider / (_divider - 1));
             return annuityRateValue.Round(4);
         }
+        /// <summary>
+        /// Считаем дату платежа \ формируем вид даты платежа
+        /// </summary>
+        protected virtual string PaymentDate(int numberOfPayments)
+        {
+            paymentDate = paymentDate.AddDays(paymentStep);
+            string _paymentDate = paymentDate.ToString("dddd dd MMMM yyyy",
+                  CultureInfo.CreateSpecificCulture("ru-RU"));
+            return _paymentDate;
+        }
+
     }
 }
