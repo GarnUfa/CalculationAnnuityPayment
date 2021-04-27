@@ -8,6 +8,7 @@ namespace CalculationAnnuityPayment.Models
 {
     public class ExtendedAnnuityPaymentModel : AnnuityPaymentModel
     {
+        [Range(1000, 500000, ErrorMessage = "Неверный срок кредитования")]
         public override decimal creditAmount { get => base.creditAmount; set => base.creditAmount = value; }
         public override decimal percentRate { get => base.percentRate; set => base.percentRate = value; }
         [Display(Name = "Срок кредитования")]
