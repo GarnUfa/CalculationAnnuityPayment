@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<CalculationAnnuityPayment.Models.ViewModel>
 
 @{
-    ViewData["Title"] = "CalculationResults";
+    ViewData["Title"] = "Результат расчетов";
 }
 
-<h1>CalculationResults</h1>
+<h1>Результат расчетов</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.paymentNumber)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.paymentDate)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.balanceOfDebt)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.percentOnDebt)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.mainDebt)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.amountOfPayment)
             </th>
             <th></th>
@@ -32,9 +32,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <th scope="row">
                 @Html.DisplayFor(modelItem => item.paymentNumber)
-            </td>
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.paymentDate)
             </td>

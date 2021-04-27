@@ -1,0 +1,34 @@
+﻿@model ExtendedAnnuityPaymentModel
+
+
+<form class="needs-validation" asp-controller="AnnuityPayment" asp-action="ExtendedCreditData" method="post" novalidate>
+    <div class="col p-0">
+        <div class="col-md-6 mb-3">
+            <label for="firstName">Сумма кредитования</label>
+            <input type="text" class="form-control " asp-for="creditAmount" placeholder="от 1000 до 500000" value="" required>
+            <span asp-validation-for="creditAmount" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Процентная ставка</label>
+            <input type="text" class="form-control " asp-for="percentRate" placeholder="от 1 до 100" value="" required>
+            <span asp-validation-for="percentRate" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Срок кредитования в днях</label>
+            <input type="text" class="form-control " asp-for="creditPeriod" placeholder="от 1 до 3650" value="" required>
+            <span asp-validation-for="creditPeriod" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Шаг платежа</label>
+            <input type="text" class="form-control " asp-for="paymentStep" placeholder="от 2 до 50" value="" required>
+            <span asp-validation-for="paymentStep" class="text-danger"></span>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="col-md-5 mb-3">
+        <button class="btn btn-primary " type="submit">Рассчитать</button>
+    </div>
+</form>

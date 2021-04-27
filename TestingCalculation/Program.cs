@@ -6,6 +6,8 @@ namespace TestingCalculation
     {
         static void Main(string[] args)
         {
+
+
             //decimal creditAmount;
             //decimal percentRate;
             //decimal numberOfMonths;

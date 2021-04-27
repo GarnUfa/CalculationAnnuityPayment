@@ -1,67 +1,52 @@
 ﻿using CalculationAnnuityPayment.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CalculationAnnuityPayment.Services
 {
-    internal class AnnuityPaymentData
+    internal class AnnuityPaymentData: AnnuityPayment, IAnnuityPayment
     {
-        private decimal creditAmount { get; set; }
-        private decimal percentRate { get; set; }
-        private int numberOfMonths { get; set; }
-
         public AnnuityPaymentData(AnnuityPaymentModel model)
         {
+            paymentStep = 30;
             creditAmount = model.creditAmount;
             percentRate = model.percentRate;
-            numberOfMonths = int.Parse(model.numberOfMonths);
+            creditPeriod = model.creditPeriod;
+            numberOfPayments = model.creditPeriod;
 
             balanceOfDebt = model.creditAmount;
-            annuityRate = AnnuityRate();
-            paymentDate = DateTime.Now;
+            annuityRate = AnnuityRate(percentRate, numberOfPayments);
         }
 
-        private decimal AnnuityRate()
-        {
-            decimal annuityRateValue;
-            decimal _percentDoub = percentRate.ByMonth().PercentNumerical();
-            decimal _divider = divider();
-            decimal divider()
-            {
-                return
-                    (decimal)(Math.Pow(1 +
-                    (double)percentRate.ByMonth().PercentNumerical(),
-                    (double)numberOfMonths) - 1);
-            }
-            annuityRateValue = creditAmount * (_percentDoub + (_percentDoub / _divider));
-            return annuityRateValue.Round(4);
-        }
-
-        private decimal balanceOfDebt { get; set; }
-        private decimal percentOnDebt { get; set; }
-        private decimal mainDebt { get; set; }
-        private decimal annuityRate { get; set; }
-        public DateTime paymentDate { get; set; }
-
+        /// <summary>
+        /// Процентная часть в платеже
+        /// </summary>
         private void PercentOnDebt() =>
             percentOnDebt = (balanceOfDebt * (percentRate.PercentNumerical().ByMonth())).Round(4);
+        /// <summary>
+        /// Основной платеж
+        /// </summary>
         private void MainDebt() =>
             mainDebt = annuityRate - percentOnDebt;
+        /// <summary>
+        /// Сумма долга на момент платежа
+        /// </summary>
         private void BalanceOfDebt() =>
             balanceOfDebt = balanceOfDebt - mainDebt;
-        private void PaymentDate() =>
-            paymentDate = paymentDate.AddDays(30);
+        /// <summary>
+        /// Дата платежа
+        /// </summary>
 
-
-        private ViewModel ViewData(int numberOfMonths)
+        
+        private ViewModel ViewData(int currentPayment)
         {
-            PaymentDate();
             PercentOnDebt();
             MainDebt();
             BalanceOfDebt();
             return new ViewModel(
-                numberOfMonths,
-                paymentDate,
+                currentPayment,
+                PaymentDate(currentPayment),
                 balanceOfDebt,
                 percentOnDebt,
                 mainDebt,
@@ -70,7 +55,7 @@ namespace CalculationAnnuityPayment.Services
         }
         public IEnumerable<ViewModel> PaymentList()
         {
-            for (int i = 0; i < numberOfMonths; i++)
+            for (int i = 1; i <= numberOfPayments; i++)
             {
                 yield return ViewData(i);
             }

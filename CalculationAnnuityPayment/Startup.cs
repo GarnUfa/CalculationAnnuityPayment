@@ -1,3 +1,4 @@
+using CalculationAnnuityPayment.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -52,6 +53,8 @@ namespace CalculationAnnuityPayment
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+            //services.AddTransient<IAnnuityPayment, AnnuityPaymentData>();
+            //services.AddTransient<ExtendedAnnuityPaymentData>();
             //services.AddSingleton<IConfigureOptions<MvcOptions>, ConfigureModelBindingLocalization>();
         }
 
